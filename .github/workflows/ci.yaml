@@ -1,34 +1,58 @@
-name: CI con AutoCommit
+name: Generar y Publicar Documentación
 
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
 
-permissions:
-  contents: write   # 👈 IMPORTANTE: permite que el bot pueda hacer commits/push
-
-
 jobs:
-  test-and-update:
+  build-docs:
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Checkout del repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Configurar Python
+      # 2. Instalar JDK
+      - name: Instalar JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      # 3. Instalar Python
+      - name: Instalar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
-      - name: Instalar dependencias
-        run: pip install pytest
-
-      - name: Ejecutar script de tests y actualizar README
-        run: python update_readme.py
-
-      - name: Commit automático del README
-        uses: stefanzweifel/git-auto-commit-action@v5
+      # 4. Instalar Node.js
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
         with:
-          commit_message: "Update README con estado de tests"
-          file_pattern: README.md
+          node-version: "18"
+
+      # 5. Instalar dependencias de documentación
+      # Cambia estos comandos según tu generador (Sphinx, Docusaurus, JSDoc, etc.)
+      - name: Instalar dependencias de docs
+        run: |
+          pip install sphinx
+          npm install
+          # ./gradlew build (si lo necesitas)
+      
+      # 6. Generar la documentación HTML
+      # Ajusta el comando a tu sistema de documentación
+      - name: Generar docs HTML
+        run: |
+          sphinx-build docs docs/_build/html
+          # Ejemplos alternativos:
+          # npm run build
+          # javadoc -d docs html...
+
+      # 7. Publicar en GitHub Pages
+      - name: Publicar a GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
