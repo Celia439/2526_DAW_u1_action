@@ -1,8 +1,10 @@
-name: Generar y Publicar Documentación
+name: Generar y Publicar Documentación Java
 
 on:
+  # Dispara en cada push a la rama 'main'
   push:
     branches: [ "main" ]
+  # Permite ejecutarlo manualmente
   workflow_dispatch:
 
 jobs:
@@ -14,45 +16,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2. Instalar JDK
+      # 2. Instalar JDK (Necesario para compilar y Javadoc)
       - name: Instalar JDK
         uses: actions/setup-java@v3
         with:
+          # Puedes cambiar a '11', '21', etc., según la versión de Java que uses.
+          java-version: "17" 
           distribution: "temurin"
-          java-version: "17"
-
-      # 3. Instalar Python
-      - name: Instalar Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-
-      # 4. Instalar Node.js
-      - name: Instalar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      # 5. Instalar dependencias de documentación
-      # Cambia estos comandos según tu generador (Sphinx, Docusaurus, JSDoc, etc.)
-      - name: Instalar dependencias de docs
+          
+      # 3. Generar la documentación HTML con Javadoc
+      # Ajusta el comando según la estructura de tu proyecto:
+      # -sourcepath src: Indica la carpeta raíz donde están tus archivos .java (e.g., src, src/main/java)
+      # -d docs/javadoc: Es la carpeta de destino donde se guardará el HTML
+      - name: Generar docs HTML con Javadoc
         run: |
-          pip install sphinx
-          npm install
-          # ./gradlew build (si lo necesitas)
-      
-      # 6. Generar la documentación HTML
-      # Ajusta el comando a tu sistema de documentación
-      - name: Generar docs HTML
-        run: |
-          sphinx-build docs docs/_build/html
-          # Ejemplos alternativos:
-          # npm run build
-          # javadoc -d docs html...
+          javadoc -d docs/api src/*.java -encoding UTF-8 -charset UTF-8 -author -version
 
-      # 7. Publicar en GitHub Pages
+      # 4. Publicar en GitHub Pages
       - name: Publicar a GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_build/html
+          # IMPORTANTE: El 'publish_dir' debe coincidir con la carpeta de destino de Javadoc
+          publish_dir: docs/javadoc
