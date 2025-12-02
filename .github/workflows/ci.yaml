@@ -38,4 +38,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # IMPORTANTE: El 'publish_dir' debe coincidir con la carpeta de destino de Javadoc
-          publish_dir: docs/javadoc
+          publish_dir: docs/api 
