@@ -20,13 +20,12 @@ jobs:
       - name: Instalar JDK
         uses: actions/setup-java@v3
         with:
-          # Puedes cambiar a '11', '21', etc., según la versión de Java que uses.
+          # Puedes cambiar a '11', '21', etc., según la versión de Java que utilicemos.
           java-version: "17" 
           distribution: "temurin"
           
       # 3. Generar la documentación HTML con Javadoc
       # Ajusta el comando según la estructura de tu proyecto:
-      # -sourcepath src: Indica la carpeta raíz donde están tus archivos .java (e.g., src, src/main/java)
       # -d docs/javadoc: Es la carpeta de destino donde se guardará el HTML
       - name: Generar docs HTML con Javadoc
         run: |
