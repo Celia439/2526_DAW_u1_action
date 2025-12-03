@@ -14,12 +14,15 @@ permissions:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
-
     steps:
       # 1. Checkout del repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # *** PASO 1b: Crea/valida la carpeta ANTES de Doxygen ***
+      - name: Crear carpeta docs
+        run: |
+          mkdir -p docs
       # 2. Instalar JDK (Necesario para compilar y Javadoc)
       - name: Instalar JDK
         uses: actions/setup-java@v3
@@ -34,9 +37,7 @@ jobs:
         run: |
           # Actualizar repositorios y descargar los paquetes necesarios
           sudo apt-get install -y doxygen texlive-latex-extra
-
-
-
+          
       # 2b. Generar el PDF
       - name: Generar PDF con Doxygen y LaTeX
         run: |
