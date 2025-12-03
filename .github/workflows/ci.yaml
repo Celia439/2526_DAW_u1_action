@@ -28,14 +28,22 @@ jobs:
           distribution: "temurin"
           
       # --- INICIO PASOS PARA PDF (Artefacto Descargable) ---
-
+# primer intento para instalarlo ( era muy basica y se nesetitan otros paquetes)
       # 2a. Instalar Doxygen y LaTeX
+   #   - name: Instalar Doxygen y LaTeX
+    #    run: |
+    #      # Actualizar repositorios y descargar los paquetes necesarios
+    #      sudo apt-get update
+    #      sudo apt-get install -y doxygen texlive-latex-base
+          
+   # 2a. Instalar Doxygen y LaTeX ( pero con los paquetes nesesarios)
       - name: Instalar Doxygen y LaTeX
         run: |
           # Actualizar repositorios y descargar los paquetes necesarios
-          sudo apt-get update
-          sudo apt-get install -y doxygen texlive-latex-base
-          
+          sudo apt-get install -y doxygen texlive-latex-extra
+
+
+
       # 2b. Generar el PDF
       - name: Generar PDF con Doxygen y LaTeX
         run: |
