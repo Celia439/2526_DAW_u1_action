@@ -1,0 +1,37 @@
+\begin{theindex}
+
+  \item {actualizarDescripcion}
+    \subitem {Producto}, \hyperpage{4}
+  \item {agregarStock}
+    \subitem {Producto}, \hyperpage{4}
+  \item {aplicarDescuento}
+    \subitem {Producto}, \hyperpage{5}
+
+  \indexspace
+
+  \item {comprarProducto}
+    \subitem {Producto}, \hyperpage{5}
+
+  \indexspace
+
+  \item {Main}, \hyperpage{3}
+  \item {mostrarProducto}
+    \subitem {Producto}, \hyperpage{5}
+
+  \indexspace
+
+  \item {Producto}, \hyperpage{3}
+    \subitem {actualizarDescripcion}, \hyperpage{4}
+    \subitem {agregarStock}, \hyperpage{4}
+    \subitem {aplicarDescuento}, \hyperpage{5}
+    \subitem {comprarProducto}, \hyperpage{5}
+    \subitem {mostrarProducto}, \hyperpage{5}
+    \subitem {Producto}, \hyperpage{4}
+    \subitem {venderProducto}, \hyperpage{6}
+
+  \indexspace
+
+  \item {venderProducto}
+    \subitem {Producto}, \hyperpage{6}
+
+\end{theindex}

@@ -1,0 +1,173 @@
+\doxysection{Producto Class Reference}
+\hypertarget{classProducto}{}\label{classProducto}\index{Producto@{Producto}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classProducto_a1913c10f0c72c4464cb204f68d81376e}{Producto}} (String nombre, Integer unidades, String descripcion, Double precio)
+\item 
+void \mbox{\hyperlink{classProducto_a3d98d19b7e3e3e4538580237c8451c11}{mostrar\+Producto}} ()
+\item 
+Double \mbox{\hyperlink{classProducto_ab4536001adcb590e25f82d538ef811d1}{comprar\+Producto}} (Integer unidades)
+\item 
+void \mbox{\hyperlink{classProducto_a4614733cacddacd50fe6157f33d13b0b}{aplicar\+Descuento}} (Integer descuento)
+\item 
+void \mbox{\hyperlink{classProducto_a950920fb36bffb16b30e6eae29332441}{agregar\+Stock}} (Integer unidades)
+\item 
+void \mbox{\hyperlink{classProducto_a46e1b2032770ecac11f23360b3837ca5}{vender\+Producto}} (Integer unidades)
+\item 
+void \mbox{\hyperlink{classProducto_a20a32f1c4e5a4fd49a358439ef0e4a5e}{actualizar\+Descripcion}} (String nueva\+Descripcion)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classProducto_ac985528faac3de53b3c99800533de02c}\label{classProducto_ac985528faac3de53b3c99800533de02c} 
+String {\bfseries nombre}
+\item 
+\Hypertarget{classProducto_aac3892c30dcc0bd4d2badaf0bde38df2}\label{classProducto_aac3892c30dcc0bd4d2badaf0bde38df2} 
+Integer {\bfseries unidades}
+\item 
+\Hypertarget{classProducto_a4f684d284d7b3aea03411c49bab4f592}\label{classProducto_a4f684d284d7b3aea03411c49bab4f592} 
+String {\bfseries descripcion}
+\item 
+\Hypertarget{classProducto_ae15c4f77b0b8eea0df336443e0b5a703}\label{classProducto_ae15c4f77b0b8eea0df336443e0b5a703} 
+Double {\bfseries precio}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representa un producto dentro de un inventario, incluyendo sus datos básicos como nombre, unidades disponibles, descripción y precio. Permite realizar operaciones comunes como aplicar descuentos, calcular el costo total de una compra y gestionar el stock. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classProducto_a1913c10f0c72c4464cb204f68d81376e}\label{classProducto_a1913c10f0c72c4464cb204f68d81376e} 
+\index{Producto@{Producto}!Producto@{Producto}}
+\index{Producto@{Producto}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{Producto()}{Producto()}}
+{\footnotesize\ttfamily Producto.\+Producto (\begin{DoxyParamCaption}\item[{String}]{nombre,  }\item[{Integer}]{unidades,  }\item[{String}]{descripcion,  }\item[{Double}]{precio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Crea un nuevo producto con los datos proporcionados.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & nombre del producto \\
+\hline
+{\em unidades} & cantidad inicial disponible \\
+\hline
+{\em descripcion} & breve descripción del producto \\
+\hline
+{\em precio} & precio unitario del producto \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si nombre es vacío, unidades o precio son negativos \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classProducto_a20a32f1c4e5a4fd49a358439ef0e4a5e}\label{classProducto_a20a32f1c4e5a4fd49a358439ef0e4a5e} 
+\index{Producto@{Producto}!actualizarDescripcion@{actualizarDescripcion}}
+\index{actualizarDescripcion@{actualizarDescripcion}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{actualizarDescripcion()}{actualizarDescripcion()}}
+{\footnotesize\ttfamily void Producto.\+actualizar\+Descripcion (\begin{DoxyParamCaption}\item[{String}]{nueva\+Descripcion }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Actualiza la descripción del producto.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nueva\+Descripcion} & nuevo texto descriptivo para el producto \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si la nueva descripción es vacía o nula \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classProducto_a950920fb36bffb16b30e6eae29332441}\label{classProducto_a950920fb36bffb16b30e6eae29332441} 
+\index{Producto@{Producto}!agregarStock@{agregarStock}}
+\index{agregarStock@{agregarStock}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{agregarStock()}{agregarStock()}}
+{\footnotesize\ttfamily void Producto.\+agregar\+Stock (\begin{DoxyParamCaption}\item[{Integer}]{unidades }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Aumenta el stock del producto sumando las unidades indicadas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em unidades} & cantidad de unidades a agregar \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si la cantidad es negativa o cero \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classProducto_a4614733cacddacd50fe6157f33d13b0b}\label{classProducto_a4614733cacddacd50fe6157f33d13b0b} 
+\index{Producto@{Producto}!aplicarDescuento@{aplicarDescuento}}
+\index{aplicarDescuento@{aplicarDescuento}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{aplicarDescuento()}{aplicarDescuento()}}
+{\footnotesize\ttfamily void Producto.\+aplicar\+Descuento (\begin{DoxyParamCaption}\item[{Integer}]{descuento }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Aplica un descuento porcentual al precio actual del producto.
+
+
+\begin{DoxyParams}{Parameters}
+{\em descuento} & porcentaje de descuento a aplicar (0 a 100) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si el descuento es negativo o mayor a 100 \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classProducto_ab4536001adcb590e25f82d538ef811d1}\label{classProducto_ab4536001adcb590e25f82d538ef811d1} 
+\index{Producto@{Producto}!comprarProducto@{comprarProducto}}
+\index{comprarProducto@{comprarProducto}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{comprarProducto()}{comprarProducto()}}
+{\footnotesize\ttfamily Double Producto.\+comprar\+Producto (\begin{DoxyParamCaption}\item[{Integer}]{unidades }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Calcula el precio total al comprar una cantidad específica de unidades.
+
+
+\begin{DoxyParams}{Parameters}
+{\em unidades} & cantidad de unidades que se desea comprar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+el valor total de la compra 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si la cantidad de unidades es negativa o cero \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classProducto_a3d98d19b7e3e3e4538580237c8451c11}\label{classProducto_a3d98d19b7e3e3e4538580237c8451c11} 
+\index{Producto@{Producto}!mostrarProducto@{mostrarProducto}}
+\index{mostrarProducto@{mostrarProducto}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{mostrarProducto()}{mostrarProducto()}}
+{\footnotesize\ttfamily void Producto.\+mostrar\+Producto (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Muestra la información completa del producto en consola. \Hypertarget{classProducto_a46e1b2032770ecac11f23360b3837ca5}\label{classProducto_a46e1b2032770ecac11f23360b3837ca5} 
+\index{Producto@{Producto}!venderProducto@{venderProducto}}
+\index{venderProducto@{venderProducto}!Producto@{Producto}}
+\doxysubsubsection{\texorpdfstring{venderProducto()}{venderProducto()}}
+{\footnotesize\ttfamily void Producto.\+vender\+Producto (\begin{DoxyParamCaption}\item[{Integer}]{unidades }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Resta unidades del stock al vender el producto.
+
+
+\begin{DoxyParams}{Parameters}
+{\em unidades} & cantidad de unidades a vender \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & si la cantidad es negativa o cero \\
+\hline
+{\em Illegal\+State\+Exception} & si la cantidad a vender excede el stock disponible \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Producto.\+java\end{DoxyCompactItemize}
