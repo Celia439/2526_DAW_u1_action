@@ -55,9 +55,9 @@ jobs:
           # 3. Compilar el archivo LaTeX a PDF (se crea refman.pdf)
           make pdf
           
-          # 4. USAMOS RUTA ABSOLUTA con GITHUB_WORKSPACE para copiar el PDF sin errores de navegación.
-          # Esto garantiza que el PDF se mueva correctamente a la raíz/docs/documentacion.pdf
-          cp refman.pdf "${GITHUB_WORKSPACE}/docs/documentacion.pdf"
+          # 4.Copiamos a la raíz y luego movemos a docs/
+          cp refman.pdf ../../../documentacion.pdf
+          mv ../../../documentacion.pdf ../../../docs/documentacion.pdf
 
       # 2c. Subir PDF como Artefacto
       - name: Subir PDF como artefacto
