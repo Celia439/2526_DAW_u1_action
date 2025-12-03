@@ -44,6 +44,24 @@ Este proyecto sirve para aprender a usar GitHub Actions 🚀
 
 * CD (Despliegue Continuo): Se implementa porque inmediatamente después de la generación, la documentación HTML se publica (despliega) de forma automática en el entorno público (GitHub Pages) sin requerir ningún paso manual adicional por parte del desarrollador. El push es la única acción necesaria para actualizar el sitio web.
 
+## i)Multiformato (opcional). ¿Qué segundo formato (además de HTML) generaste? Explica la herramienta, configuración y comandos utilizados. ¿Dónde se puede acceder a este formato?
+* Un pdf 
+* Utilice la herramineta Doxygen + LaTeX 
+* Doxygen utiliza un proyecto LaTeX para generar pdf con make pdf
+* La configuración se utiliza de un archivo llamado Doxyfile conde expecificamos que vamos a generar, el directorio dode se alojara...
+* Comandos:
+```
+ sudo apt-get update
+ sudo apt-get install -y doxygen texlive-latex-extra
+ doxygen Doxyfile
+ docs/doxygen_output/latex/
+ make pdf
+ cp refman.pdf ../../../documentacion.pdf
+ mv ../../../documentacion.pdf ../../../docs/documentacion.pdf
+docs/documentacion.pdf
+```
+* Para acceder al pdf en el propio github en Actions => última ejecución => Artifacts
+* Se localiza el archivo pdf para descargar
 ## enlace 
 * https://celia439.github.io/2526_DAW_u1_action/
 
