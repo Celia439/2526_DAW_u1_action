@@ -1,0 +1,11 @@
+# Archivo: Doxyfile (en la raíz)
+# ---------------------------------------------------------------------------
+# Configuración Mínima para generar LaTeX
+# ---------------------------------------------------------------------------
+PROJECT_NAME           = "Documentación Técnica del Proyecto Java"
+OUTPUT_DIRECTORY       = docs/doxygen_output
+INPUT                  = src         # Rutas donde buscar el código fuente
+RECURSIVE              = YES         # Buscar recursivamente en 'src'
+GENERATE_HTML          = NO          # Desactivar HTML, ya lo hace Javadoc
+GENERATE_LATEX         = YES         # ¡Activar la generación de LaTeX!
+QUIET                  = YES         # No mostrar mensajes excesivos

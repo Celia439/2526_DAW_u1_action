@@ -24,6 +24,32 @@ jobs:
           java-version: "17" 
           distribution: "temurin"
           
+# 2a. Instalar Doxygen y LaTeX
+    # Doxygen leerá el código, y LaTeX lo convertirá en PDF.
+      - name: Instalar Doxygen y LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen texlive-latex-base
+
+# 2b. Generar el PDF
+      - name: Generar PDF con Doxygen y LaTeX
+        run: |
+          # 1. Ejecutar Doxygen usando el Doxyfile
+          doxygen Doxyfile
+          # 2. Entrar a la carpeta donde Doxygen puso el código LaTeX
+          cd docs/doxygen_output/latex 
+          # 3. Compilar el archivo LaTeX a PDF (se crea refman.pdf)
+          make pdf
+          # 4. Mover el PDF terminado a una ruta más fácil de encontrar
+          cp refman.pdf ../../docs/documentacion.pdf
+
+# 2c. Subir PDF como Artefacto
+      - name: Subir PDF como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentacion-pdf
+          path: docs/documentacion.pdf
+
       # 3. Generar la documentación HTML con Javadoc
       # Ajusta el comando según la estructura de tu proyecto:
       # -d docs/javadoc: Es la carpeta de destino donde se guardará el HTML
