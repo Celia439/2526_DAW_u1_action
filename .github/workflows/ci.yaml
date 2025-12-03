@@ -1,13 +1,10 @@
 name: Generar y Publicar Documentación Java
 
 on:
-  # Dispara en cada push a la rama 'main'
   push:
     branches: [ "main" ]
-  # Permite ejecutarlo manualmente desde GitHub
   workflow_dispatch:
 
-# Otorga permisos de escritura para que la acción peaceiris/actions-gh-pages pueda hacer push a la rama gh-pages
 permissions:
   contents: write
 
@@ -16,17 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout del repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 1b. Crea/Valida la carpeta 'docs' para permisos de escritura del PDF final.
-      # Esto asegura que la ruta exista y sea escribible.
       - name: Crear carpeta docs (Validación de ruta)
         run: |
           mkdir -p docs
           
-      # 2. Instalar JDK (Necesario para compilar y Javadoc)
       - name: Instalar JDK
         uses: actions/setup-java@v3
         with:
@@ -35,31 +28,19 @@ jobs:
           
       # --- INICIO PASOS PARA PDF (Artefacto Descargable) ---
 
-      # 2a. Instalar Doxygen y LaTeX
       - name: Instalar Doxygen y LaTeX
         run: |
-          # 1. NECESARIO: Actualizar repositorios para evitar errores de descarga (Exit Code 100)
           sudo apt-get update
-          # 2. NECESARIO: Instalar Doxygen y el paquete completo de LaTeX para evitar el error 'float.sty' not found
           sudo apt-get install -y doxygen texlive-latex-extra
           
-      # 2b. Generar el PDF (CORRECCIÓN CLAVE DE RUTA)
       - name: Generar PDF con Doxygen y LaTeX
         run: |
-          # 1. Ejecutar Doxygen
           doxygen Doxyfile
-          
-          # 2. Entrar a la carpeta donde Doxygen puso el código LaTeX
           cd docs/doxygen_output/latex 
-          
-          # 3. Compilar el archivo LaTeX a PDF (se crea refman.pdf)
           make pdf
-          
-          # 4.Copiamos a la raíz y luego movemos a docs/
           cp refman.pdf ../../../documentacion.pdf
           mv ../../../documentacion.pdf ../../../docs/documentacion.pdf
 
-      # 2c. Subir PDF como Artefacto
       - name: Subir PDF como artefacto
         uses: actions/upload-artifact@v4
         with:
@@ -68,16 +49,12 @@ jobs:
           
       # --- FIN PASOS PARA PDF ---
 
-      # 3. Generar la documentación HTML con Javadoc
       - name: Generar docs HTML con Javadoc
         run: |
-          # -d docs/api es la carpeta de destino que luego se subirá a GitHub Pages
           javadoc -d docs/api src/*.java -encoding UTF-8 -charset UTF-8 -author -version
 
-      # 4. Publicar en GitHub Pages (Despliegue Continuo)
       - name: Publicar a GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # IMPORTANTE: El 'publish_dir' debe coincidir con la carpeta de destino de Javadoc (docs/api)
           publish_dir: docs/api
