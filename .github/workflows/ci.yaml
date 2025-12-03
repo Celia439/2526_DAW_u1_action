@@ -14,15 +14,18 @@ permissions:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+
     steps:
       # 1. Checkout del repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # *** PASO 1b: Crea/valida la carpeta ANTES de Doxygen ***
-      - name: Crear carpeta docs
+      # 1b. Crea/Valida la carpeta 'docs' para permisos de escritura del PDF final.
+      # Esto asegura que la ruta exista y sea escribible.
+      - name: Crear carpeta docs (Validación de ruta)
         run: |
           mkdir -p docs
+          
       # 2. Instalar JDK (Necesario para compilar y Javadoc)
       - name: Instalar JDK
         uses: actions/setup-java@v3
@@ -31,18 +34,19 @@ jobs:
           distribution: "temurin"
           
       # --- INICIO PASOS PARA PDF (Artefacto Descargable) ---
-  
-   # 2a. Instalar Doxygen y LaTeX ( pero con los paquetes nesesarios)
+
+      # 2a. Instalar Doxygen y LaTeX
       - name: Instalar Doxygen y LaTeX
         run: |
-          # Actualizar repositorios y descargar los paquetes necesarios
+          # 1. NECESARIO: Actualizar repositorios para evitar errores de descarga (Exit Code 100)
           sudo apt-get update
+          # 2. NECESARIO: Instalar Doxygen y el paquete completo de LaTeX para evitar el error 'float.sty' not found
           sudo apt-get install -y doxygen texlive-latex-extra
-
-      # 2b. Generar el PDF
+          
+      # 2b. Generar el PDF (CORRECCIÓN CLAVE DE RUTA)
       - name: Generar PDF con Doxygen y LaTeX
         run: |
-          # 1. Ejecutar Doxygen usando el Doxyfile (Genera código LaTeX)
+          # 1. Ejecutar Doxygen
           doxygen Doxyfile
           
           # 2. Entrar a la carpeta donde Doxygen puso el código LaTeX
@@ -51,8 +55,9 @@ jobs:
           # 3. Compilar el archivo LaTeX a PDF (se crea refman.pdf)
           make pdf
           
-          # 4. Mover el PDF terminado a una ruta más fácil de encontrar (docs/documentacion.pdf)
-          cp refman.pdf ../../docs/documentacion.pdf
+          # 4. USAMOS RUTA ABSOLUTA con GITHUB_WORKSPACE para copiar el PDF sin errores de navegación.
+          # Esto garantiza que el PDF se mueva correctamente a la raíz/docs/documentacion.pdf
+          cp refman.pdf "${GITHUB_WORKSPACE}/docs/documentacion.pdf"
 
       # 2c. Subir PDF como Artefacto
       - name: Subir PDF como artefacto
